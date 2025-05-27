@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import HeaderInfo from "./header-info";
 import Notification from "@/features/notification/notification";
 import Link from "next/link";
@@ -10,7 +9,7 @@ const Header: React.FC = () => {
     <header className="!w-full bg-white flex gap-x-6 items-center justify-between h-[64px] max-h-[64px] px-[15px] z-20 shadow-[0px_2px_30px_rgba(146,153,184,0.063)]">
       <div className="flex w-full relative items-center">
         <Link href={ROUTES.DEFAULT}>
-          <Image
+          {/* <Image
             src="/dashboard-logo.png"
             width={76.69}
             height={32}
@@ -21,7 +20,10 @@ const Header: React.FC = () => {
             }}
             priority
             className="min-w-[76.69px] !h-[32px]"
-          />
+          /> */}
+          <h1 className="!m-0 !p-0 leading-8 text-[28px] text-primary">
+            Inven<span className="text-accent">Track</span>
+          </h1>
         </Link>
         {/* <CollapsedTrigger /> */}
         {/* <SearchBar /> */}

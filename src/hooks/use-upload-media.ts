@@ -1,8 +1,7 @@
 import { RcFile } from "antd/es/upload";
-import httpClient from "../utils/http-client-product";
 import { useMutation } from "@tanstack/react-query";
-import ENV from "@/utils/env";
 import { AxiosProgressEvent } from "axios";
+import httpClient from "../utils/http-client";
 // import { useNotificationBar } from "../providers/notification.provider";
 
 export const uploadApi = (
@@ -16,7 +15,7 @@ export const uploadApi = (
   formData.append("type", type);
   formData.append("source", source);
 
-  return httpClient.post(`${ENV.MEDIA_SERVICE}/api/v1/upload`, formData, {
+  return httpClient.post(`/api/upload`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },

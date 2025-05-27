@@ -1,7 +1,7 @@
 export type BaseApiResponse<T = any> = {
   status: string;
   message?: string;
-  data: T;
+  results: T;
 };
 
 export interface BaseQueryParams {

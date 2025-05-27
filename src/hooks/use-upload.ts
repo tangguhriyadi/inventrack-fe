@@ -1,7 +1,6 @@
 import { RcFile } from "antd/es/upload";
 import { useMutation } from "@tanstack/react-query";
-import ENV from "@/utils/env";
-import httpClientStore from "@/utils/http-client-store";
+import httpClient from "../utils/http-client";
 // import { getSession } from "next-auth/react";
 // import { useNotificationBar } from "../providers/notification.provider";
 
@@ -9,10 +8,10 @@ export const uploadApi = async (file: RcFile | File) => {
   // const session = await getSession()
   const formData = new FormData();
   formData.append("file", file);
-  formData.append("type", "IMAGE")
+  formData.append("type", "IMAGE");
   // formData.append("storeId", session?.user.store_id ?? "")
 
-  return httpClientStore.post(`${ENV.MEDIA_SERVICE}/api/v1/upload`, formData, {
+  return httpClient.post(`/api/v1/upload`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
