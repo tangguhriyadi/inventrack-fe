@@ -1,9 +1,3 @@
-export type BaseApiResponse<T = any> = {
-  status: string;
-  message?: string;
-  results: T;
-};
-
 export interface BaseQueryParams {
   page?: number;
   limit?: number;
@@ -17,16 +11,16 @@ export interface BaseQueryParams {
   transaction_method?: string;
 }
 
-export type Pagination<T = any> = {
-  current_page: number;
-  page_size: number;
-  first_page: number;
-  last_page: number;
-  total_records: number;
-  records: T;
+export type Pagination = {
+  page: number;
+  total_page: number;
+  total_data: number;
+  data_in_page: number;
 };
 
-export type PaginatedResponse<T = any> = {
+export type BaseApiResponse<T = any> = {
   status: string;
-  data: Pagination<T>;
+  message?: string;
+  results: T;
+  pagination?: Pagination;
 };

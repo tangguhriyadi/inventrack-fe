@@ -2,7 +2,7 @@
 import { ROUTES } from "./route.config";
 import React from "react";
 import { ModuleNameEnum } from "./access-control.config";
-import ShopIcon from "../components/icon/shop";
+import { DashboardOutlined, UserOutlined } from "@ant-design/icons";
 
 interface IMenuConfig {
   key: string;
@@ -15,8 +15,14 @@ interface IMenuConfig {
 export const MENU_CONFIG: IMenuConfig[] = [
   {
     key: ROUTES.DEFAULT,
-    icon: <ShopIcon />,
+    icon: <DashboardOutlined />,
     label: "Dashboard",
     module: ModuleNameEnum.Dasboard,
+  },
+  {
+    key: ROUTES.USER.LIST,
+    label: "User",
+    module: ModuleNameEnum.User,
+    icon: <UserOutlined />,
   },
 ];

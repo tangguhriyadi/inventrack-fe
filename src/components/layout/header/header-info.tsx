@@ -32,8 +32,10 @@ const HeaderInfo: React.FC = () => {
           src={"/profile-default.png"}
           alt=""
         />
-
-        <figcaption>{data?.user.name}</figcaption>
+        <div className="flex flex-col">
+          <figcaption className="font-semibold">{data?.user.name}</figcaption>
+          <figcaption>{data?.user.role}</figcaption>
+        </div>
       </figure>
 
       <div

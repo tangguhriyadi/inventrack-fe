@@ -112,9 +112,9 @@ a {
   transform: translateY(-40%) !important;
 }
 
-.input-filled .ant-input-suffix {
+/* .input-filled .ant-input-suffix {
   transform: translateY(-30%) !important;
-}
+} */
 
 
 .floating-input-container .floating-label {
@@ -581,9 +581,4 @@ a {
   width: 100%;
   padding-left: 0;
   padding-right: 8px;
-}
-
-.ant-menu-item-extra {
-  margin-left: 0px !important;
-  padding-left: 12px !important;
 }

@@ -18,7 +18,7 @@ const AuthPageLayout: React.FC<AuthPageLayoutProps> = ({ children }) => {
             src="/dashboard-logo.png"
           />
         </div>
-        <div className="w-full h-full bg-[#F5F8FF] rounded-[20px] flex flex-col gap-y-6 justify-center items-center p-16">
+        <div className="w-full h-full bg-[#F5F8FF] rounded-[20px] flex flex-col gap-y-6 justify-between items-center p-16">
           <Image
             src="/image-auth.png"
             width={0}
@@ -28,8 +28,8 @@ const AuthPageLayout: React.FC<AuthPageLayoutProps> = ({ children }) => {
             sizes="100vw"
           />
           <p className="text-center text-2xl leading-8 w-[480px]">
-            Kelola semua pesanan dan pengirimanmu dalam{" "}
-            <strong>satu platform</strong>.
+            Manage all your bookings and inventories in one platform{" "}
+            <strong>one platform</strong>.
           </p>
         </div>
       </aside>

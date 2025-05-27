@@ -35,6 +35,7 @@ const authConfig: AuthOptions = {
             token: data.data.results.token ?? "",
             email: data.data.results.user.email,
             name: data.data.results.user.name,
+            role: data.data.results.user.role,
           };
         } catch (e: any) {
           throw new Error(e.response.data.message ?? "Something went wrong");
@@ -57,6 +58,7 @@ const authConfig: AuthOptions = {
         token.token = user.token;
         token.name = user.name;
         token.id = user.id;
+        token.role = user.role;
       }
       return token;
     },
@@ -68,6 +70,7 @@ const authConfig: AuthOptions = {
           email: token.email,
           name: token.name,
           id: token.id,
+          role: token.role,
         };
       }
       return session;

@@ -19,7 +19,7 @@ const CoreTableAction: React.FC<Props> = (props) => {
       menu={{ items }}
       placement={placement}
       trigger={["click"]}
-      destroyPopupOnHide
+      destroyOnHidden
     >
       <div
         role="button"

@@ -9,4 +9,7 @@ export const ROUTES = {
     CREATE: "/dashboard/user/create",
     EDIT: (id: string) => `/dashboard/user/edit/${id}`,
   },
-};
+  CATEGORY: {
+    LIST: "/dashboard/category",
+  },
+} as const;

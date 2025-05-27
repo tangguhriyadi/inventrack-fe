@@ -21,7 +21,7 @@ const Header: React.FC = () => {
             priority
             className="min-w-[76.69px] !h-[32px]"
           /> */}
-          <h1 className="!m-0 !p-0 leading-8 text-[28px] text-primary">
+          <h1 className="!m-0 !p-0 leading-8 text-[28px] text-primary font-bold">
             Inven<span className="text-accent">Track</span>
           </h1>
         </Link>

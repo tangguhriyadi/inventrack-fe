@@ -1,7 +1,7 @@
 export interface QueryParams {
   page?: number;
   limit?: number;
-  search?: string;
+  keyword?: string;
   sort_by?: string;
   order_by?: OrderBy;
   is_pagination?: boolean;

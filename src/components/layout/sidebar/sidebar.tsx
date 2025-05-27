@@ -58,9 +58,6 @@ const Sidebar: React.FC = () => {
 
           <Menu
             className="p-0"
-            // style={{
-            //   padding: isCollapsed ? "20px 10px" : "20px",
-            // }}
             mode="inline"
             defaultSelectedKeys={[selectedKey]}
             items={MENU_CONFIG.map((menu) => ({

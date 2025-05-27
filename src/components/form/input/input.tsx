@@ -1,6 +1,6 @@
-import type { InputProps } from "antd";
+import type { GetRef, InputProps } from "antd";
 import { Input as AntInput } from "antd";
-import React from "react";
+import React, { Ref } from "react";
 import { cn } from "@/utils/cn";
 import { PasswordProps, TextAreaProps } from "antd/es/input";
 import { OTPProps } from "antd/es/input/OTP";
@@ -10,7 +10,8 @@ import EyeClosedIcon from "../../icon/eye-closed";
 type BaseInputProps = {
   label?: string;
   error?: string;
-  isCurrency?:boolean
+  isCurrency?: boolean;
+  ref?: Ref<GetRef<typeof AntInput>>;
 };
 
 const Input: React.FC<BaseInputProps & InputProps> = (props) => {
@@ -73,6 +74,7 @@ const InputPassword: React.FC<BaseInputProps & PasswordProps> = (props) => {
     value,
     className,
     placeholder,
+    ref,
     ...rest
   } = props;
   return (
@@ -95,11 +97,12 @@ const InputPassword: React.FC<BaseInputProps & PasswordProps> = (props) => {
               <EyeOpenIcon width={20} height={20} className="!text-xl" />
             )
           }
+          ref={ref}
           {...rest}
         />
         <div className="relative">
           {error && (
-            <span className="text-[12px] text-danger absolute">{error}</span>
+            <span className="text-[12px] text-error absolute">{error}</span>
           )}
         </div>
       </div>
@@ -239,7 +242,7 @@ const InputNumber: React.FC<BaseInputProps & InputProps> = (props) => {
   };
 
   // Get the display value
-  const displayValue = isCurrency ? formatNumber(String(value)) : value
+  const displayValue = isCurrency ? formatNumber(String(value)) : value;
 
   return (
     <div className={cn("w-full relative floating-input-container")}>
