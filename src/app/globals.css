@@ -1,0 +1,589 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  @apply text-neutral;
+}
+
+ul {
+  border-inline-end: none !important;
+}
+
+input[type='password'] {
+  font-family: Verdana;
+  letter-spacing: 0.125em;
+}
+
+a {
+  @apply text-link hover:text-link-hover
+}
+
+/* width */
+.main-scroll::-webkit-scrollbar {
+  @apply h-2 w-2 translate-x-2;
+}
+
+/* Track */
+.main-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+.main-scroll::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-md;
+}
+
+/* Handle on hover */
+.main-scroll::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
+}
+
+
+/* width */
+.sider-scroll::-webkit-scrollbar {
+  @apply h-1 w-1;
+}
+
+/* Track */
+.sider-scroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.sider-scroll::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-md;
+}
+
+/* Handle on hover */
+.sider-scroll::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
+}
+
+.ant-popover {
+  position: fixed;
+  z-index: 99999;
+}
+
+.ant-popover-inner {
+  padding: 15px !important;
+  box-shadow: 0 5px 20px #9299b820;
+  border-radius: 0 0 6px 6px;
+}
+
+.ant-popover-inner .ant-popover-title {
+  padding: 5px 10px 10px;
+}
+
+.ant-popover-inner .ant-popover-inner-content a {
+  color: #5a5f7d;
+}
+
+/* .label-required::before {
+  color: #ff4d4f;
+  content: "*";
+  display: inline-block;
+  font-family: SimSun, sans-serif;
+  font-size: 14px;
+  line-height: 1;
+  margin-right: 4px;
+} */
+
+/* INPUT */
+.floating-input-container .ant-input {
+  @apply px-[12px] py-[15.5px] relative
+}
+
+
+.core-input {
+  @apply bg-white leading-[1]
+}
+
+.core-input .ant-input-password-icon {
+  @apply h-[14px];
+}
+
+.input-filled .ant-input-password-icon {
+  transform: translateY(-40%) !important;
+}
+
+.input-filled .ant-input-suffix {
+  transform: translateY(-30%) !important;
+}
+
+
+.floating-input-container .floating-label {
+  position: absolute;
+  left: 12px;
+  top: 18px; /* Initial position, matches padding */
+  font-size: 14px;
+  /* color: #393941; */
+  pointer-events: none;
+  transition: all 0.2s ease;
+  background: transparent; /* To overlay properly inside the input */
+  padding: 0 4px;
+  z-index: 10;
+  background-color: transparent;
+  font-weight: 400;
+  line-height: 1;
+  color: #909090;
+}
+
+.floating-input-container .core-input:focus + .floating-label,
+.floating-input-container .floating-label.label-float,
+.floating-input-container .ant-input-affix-wrapper .ant-input:focus + .floating-label {
+  top: 12px; /* Adjust to move above text */
+  left: 9px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: transparent;
+  color:#797676;
+  transform: translateY(120%);
+}
+
+.core-input .input-filled {
+  padding-top:20px !important;
+}
+
+.ant-steps-item-description {
+  max-width: none !important;
+}
+
+
+/* TABLE */
+
+/* .ant-pagination-prev, .ant-pagination-next {
+  @apply leading-7
+}
+.ant-table-selection .ant-table-indeterminate .ant-checkbox-inner {
+    @apply bg-primary
+}
+.ant-table-selection .ant-table-indeterminate .ant-checkbox-inner:after {
+    @apply h-[2px] bg-white
+}
+
+.ant-pagination {
+  @apply !mt-[25px]
+}
+
+.ant-table thead tr {
+  @apply rounded-[10px] 
+}
+
+.ant-table thead th {
+   @apply !text-gray bg-gray-light border-y border-y-light !font-medium
+}
+
+.ant-table thead th:first-child {
+   @apply border-l border-l-light !rounded-tl-[10] !rounded-tr-[0px] !rounded-br-[0px] !rounded-bl-[10]
+}
+
+.ant-table thead th:last-child {
+   @apply border-r border-r-light !rounded-tl-[0px] !rounded-tr-[10] !rounded-br-[10] !rounded-bl-[0px]
+}
+
+.ant-table tbody td {
+  @apply !border-none
+} */
+
+.ant-table-column-sorter-inner > .anticon-caret-up,
+.ant-table-column-sorter-inner > .anticon-caret-down {
+  color:white !important;
+}
+.ant-table-column-sorter-inner > .active {
+  @apply !text-accent
+}
+
+.ant-table-pagination {
+  background-color: #EEEEF0;
+  border-radius: 12px;
+  padding:12px !important;
+}.ant-pagination-item {
+  border-radius: 99px !important;
+  background-color: transparent !important;
+}
+.ant-pagination-item-active {
+  border-radius: 99px !important;
+  background-color: #1F6AF1 !important;
+}
+.ant-pagination-item-active > a {
+ 
+  color: #fff !important;
+}
+
+
+.ant-pagination-item {
+  border-radius: 99px !important;
+  background-color: transparent !important;
+}
+.ant-pagination-item-active {
+  @apply !rounded-[6px] !bg-primary !border-primary
+ 
+}
+.ant-pagination-item-active > a {
+  color: #fff !important;
+}
+
+
+.custom-page-changer > .ant-select-selector {
+  background-color: #D9D8DF !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+
+/* MENU */
+
+.ant-menu {
+  @apply !text-[16px] font-semibold
+}
+
+.ant-menu.ant-menu-sub.ant-menu-inline {
+  @apply !bg-white
+}
+
+.ant-menu-item.ant-menu-item-active.ant-menu-item-only-child:hover {
+  @apply !bg-surface-3 !text-primary
+}
+
+.ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child:hover {
+  @apply !bg-surface-3 !text-primary
+}
+
+.ant-menu-item:hover {
+  @apply !bg-surface-3 !text-primary
+}
+
+.ant-menu-item {
+  @apply !rounded-[99px] !px-[10px] !py-[13px] !text-text-primary
+}
+
+.ant-layout-sider-collapsed .ant-menu-item {
+  @apply !rounded-[99px] !text-text-primary !py-0 !pt-[3px] !pl-[10.5px]
+}
+.ant-layout-sider-collapsed .ant-menu-item-icon {
+  position: absolute;
+  bottom: 30%;
+  left:23%;
+}
+
+.ant-menu-item .ant-menu-item-icon {
+  @apply !text-primary-90
+}
+
+.ant-menu-item.ant-menu-item-selected:hover {
+  @apply !bg-primary-90 !text-primary
+}
+.ant-menu-item.ant-menu-item-selected {
+  @apply !bg-surface-3 !text-primary
+}
+
+.ant-menu-item.ant-menu-item-selected .ant-menu-item-icon {
+  @apply !text-primary
+}
+
+.ant-menu-submenu-title:hover {
+  @apply !bg-white
+}
+
+.ant-menu-submenu.ant-menu-submenu-selected .ant-menu-submenu-title .ant-menu-title-content {
+  @apply !text-black
+}
+
+.ant-menu-item-icon {
+  @apply !text-gray-light !text-[16px] max-w-4 max-h-4
+}
+
+/* .ant-menu-submenu.ant-menu-title-content {
+  @apply ml-5
+} */
+
+.ant-menu-submenu-arrow {
+  @apply !text-gray-light
+}
+
+/* .ant-layout-sider .ant-menu-submenu-title .ant-menu-title-content {
+  @apply !ml-5
+} */
+
+/* .ant-menu-sub .ant-menu-item.ant-menu-item-only-child {
+  @apply !pl-[60px]
+} */
+/* .ant-menu-sub .ant-menu-item.ant-menu-item-only-child .ant-menu-title-content {
+  @apply !ml-0
+} */
+
+/* .ant-layout-sider .ant-menu-item .ant-menu-title-content {
+  @apply !ml-5
+} */
+
+
+/* .ant-layout-sider-collapsed .ant-menu-item {
+  @apply pt-1
+} */
+
+/* .ant-menu-submenu-popup .ant-menu-sub .ant-menu-item.ant-menu-item-only-child {
+  @apply !pl-[16px]
+} */
+
+/* .ant-layout-sider-collapsed {
+  @apply !p-0
+} */
+/* .ant-layout-sider-collapsed .ant-menu-item.ant-menu-item-selected {
+  @apply !mx-0 !my-1 
+} */
+
+/* .ant-layout-sider-collapsed .ant-menu-item.ant-menu-item {
+  @apply !mx-0 !my-1
+} */
+
+/* .ant-layout-sider-collapsed .ant-menu-submenu-title {
+  @apply !mx-0 !my-1
+} */
+/* .ant-layout-sider-collapsed .ant-menu-item.ant-menu-item-selected {
+  @apply !rounded-none
+} */
+
+.custom-tab .ant-tabs-nav {
+  @apply !m-0 font-semibold
+}
+.custom-tab .ant-tabs-tab {
+  @apply !px-2 !py-5
+}
+
+.label-with-prefix {
+  @apply ml-[18px]
+}
+
+.core-input-date {
+  height: 48px;
+}
+
+.floating-input-date-container .floating-label {
+  position: absolute;
+  left: 12px;
+  top: 35%; /* Initial position, matches padding */
+  font-size: 14px;
+  /* color: #393941; */
+  pointer-events: none;
+  transition: all 0.2s ease;
+  background: transparent; /* To overlay properly inside the input */
+  padding: 0 4px;
+  z-index: 10;
+  background-color: transparent;
+  font-weight: 400;
+  line-height: 1;
+  color: #909090;
+}
+
+.floating-input-container .core-input-date:focus + .floating-label,
+.floating-input-container .floating-label.label-float,
+.floating-input-container .ant-input-affix-wrapper .ant-input:focus + .floating-label {
+  top: -6px; /* Adjust to move above text */
+  left: 9px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: transparent;
+  color:#797676;
+  transform: translateY(120%);
+}
+.floating-input-date-container.active .floating-label  {
+  top: -6px; /* Adjust to move above text */
+  left: 9px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: transparent;
+  color:#797676;
+  transform: translateY(120%);
+}
+
+
+.floating-select-container {
+  position: relative;
+  display: inline-block;
+}
+
+.floating-select-container .floating-label {
+  position: absolute;
+  left: 11px;
+  top: 52%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: all 0.2s ease;
+  background: transparent;
+  padding: 0 4px;
+  font-weight: 400;
+  line-height: 1;
+  font-size: 14px;
+  color: #909090;
+}
+
+.floating-select-container.active .floating-label {
+  top: 0px; /* Adjust to move above text */
+  left: 9px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: white;
+  transform: translateY(70%);
+  color:#797676;
+}
+
+.core-select > .ant-select-selector {
+  padding-top: 11px !important;
+  padding-left: 12px !important;
+}
+
+.ant-otp-input {
+  padding: 12px !important;
+}
+
+.select-label-with-prefix {
+  @apply ml-[26px]
+}
+
+/* INTROJS */
+.introjs-tooltip {
+  @apply !rounded-[20px] !w-[512px] !max-w-[512px]
+}
+
+.introjs-arrow {
+  border: 10px solid transparent !important;
+}
+
+.introjs-arrow.left {
+  left:-17px !important;
+  border-right-color: #fff !important;
+}
+.introjs-arrow.top {
+  border-right-color: #fff !important;
+  left:18px !important;
+  top:-19px !important;
+  transform: rotate(90deg);
+}
+
+.introjs-tooltipbuttons {
+  border:none !important;
+}
+
+.introjs-tooltiptext {
+  @apply !px-4 !py-2
+}
+
+.introjs-tooltip-header {
+  @apply !px-4
+}
+
+.introjs-tooltipbuttons {
+  @apply !px-4 !pb-4 !flex !justify-end !gap-x-3 !pt-0
+}
+
+.introjs-nextbutton {
+  @apply !bg-primary !rounded-md !text-white transition-all duration-300 outline-none appearance-none !border-none
+}
+.introjs-nextbutton:hover {
+  @apply !bg-primary-hover transition-all duration-300
+}
+.introjs-nextbutton:focus {
+  @apply !border-none !shadow-none
+}
+
+.introjs-prevbutton {
+  @apply  !rounded-md
+}
+
+.ant-select-prefix {
+  transform: translateY(-15%);
+  margin-right: 6px !important;
+}
+.ant-breadcrumb-separator {
+  @apply flex items-center
+}
+
+.core-input-date-range {
+  height: 48px;
+}
+
+.floating-input-date-range-container .floating-label {
+  position: absolute;
+  left: 12px;
+  top: 35%; /* Initial position, matches padding */
+  font-size: 14px;
+  /* color: #393941; */
+  pointer-events: none;
+  transition: all 0.2s ease;
+  background: transparent; /* To overlay properly inside the input */
+  padding: 0 4px;
+  z-index: 10;
+  background-color: transparent;
+  font-weight: 400;
+  line-height: 1;
+  color: #909090;
+}
+
+.floating-input-date-range-container .core-input-date-range:focus + .floating-label,
+.floating-input-date-range-container .floating-label.label-float,
+.floating-input-date-range-container .ant-input-affix-wrapper .ant-input:focus + .floating-label {
+  top: -6px; /* Adjust to move above text */
+  left: 9px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: transparent;
+  color:#797676;
+  transform: translateY(120%);
+}
+.floating-input-date-range-container.active .floating-label  {
+  top: -10px; /* Adjust to move above text */
+  left: 9px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: transparent;
+  color:#797676;
+  transform: translateY(120%);
+}
+
+.introjs-helperNumberLayer {
+  position: absolute;
+  top: 8px; /* Adjust as needed */
+  left: 8px; /* Adjust as needed */
+  /* Ensure the number is visible against the tooltip background */
+  padding: 0px 8px !important;
+  
+}
+
+.introjs-tooltip-title {
+  margin-top: 28px !important;
+}
+
+.custom-radio-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.custom-radio-item {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.custom-radio-item .ant-radio {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+.custom-radio-item .ant-radio + span {
+  width: 100%;
+  padding-left: 0;
+  padding-right: 8px;
+}
+
+.ant-menu-item-extra {
+  margin-left: 0px !important;
+  padding-left: 12px !important;
+}

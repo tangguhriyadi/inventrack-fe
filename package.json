@@ -1,0 +1,44 @@
+{
+  "name": "inventrack-fe",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.5.2",
+    "@ant-design/nextjs-registry": "^1.0.2",
+    "@fontsource/manrope": "^5.2.5",
+    "@n8n/chat": "^0.27.1",
+    "@tanstack/react-query": "^5.64.2",
+    "antd": "^5.23.2",
+    "axios": "^1.7.9",
+    "dayjs": "^1.11.13",
+    "formik": "^2.4.6",
+    "jsonwebtoken": "^9.0.2",
+    "next": "15.1.5",
+    "next-auth": "^4.24.11",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^2.6.0",
+    "yup": "^1.6.1",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "@ant-design/v5-patch-for-react-19": "1.0.3",
+    "@eslint/eslintrc": "^3",
+    "@types/jsonwebtoken": "^9.0.8",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "clsx": "^2.1.1",
+    "eslint": "^9",
+    "eslint-config-next": "15.1.5",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}
