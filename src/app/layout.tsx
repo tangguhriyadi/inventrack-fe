@@ -10,8 +10,8 @@ import "./globals.css";
 import MainProvider from "../providers/main.provider";
 
 export const metadata: Metadata = {
-  title: "Pos Aja UMKM",
-  description: "Pos Aja UMKM",
+  title: "Inventrack",
+  description: "Inventrack",
 };
 
 export default function RootLayout({
