@@ -3,13 +3,15 @@ export enum ModuleNameEnum {
   User = "user",
   Inventory = "Inventory",
   Category = "Category",
+  Booking = "Booking"
 }
 
 export enum AccessControllActionEnum {
-  View = "view",
-  List = "list",
-  Detail = "detail",
-  Create = "create",
-  Update = "update",
-  Delete = "delete",
+  List = "LIST",
+  // Detail = "DETAIL",
+  Create = "CREATE",
+  Update = "UPDATE",
+  Delete = "DELETE",
+  Approve = "APPROVE",
+  Reject = "REJECT",
 }

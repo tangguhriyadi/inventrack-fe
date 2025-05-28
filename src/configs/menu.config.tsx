@@ -6,6 +6,7 @@ import {
   DashboardOutlined,
   DatabaseOutlined,
   ProductOutlined,
+  ScheduleOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 
@@ -29,6 +30,12 @@ export const MENU_CONFIG: IMenuConfig[] = [
     label: "Inventory",
     module: ModuleNameEnum.Inventory,
     icon: <ProductOutlined />,
+  },
+  {
+    key: ROUTES.BOOKING.LIST,
+    label: "Booking",
+    module: ModuleNameEnum.Booking,
+    icon: <ScheduleOutlined />,
   },
   {
     key: ROUTES.USER.LIST,

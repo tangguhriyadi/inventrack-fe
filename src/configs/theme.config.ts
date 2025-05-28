@@ -147,5 +147,6 @@ export const theme: ThemeConfig = {
       paddingSM: 16,
       borderRadius: 20,
     },
+
   },
 };
