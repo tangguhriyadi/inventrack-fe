@@ -17,27 +17,27 @@ export const createUserSchema = yup.object({
     .string()
     .min(
       8,
-      "Password must be at least 8 characters consisting of uppercase letters, lowercase letters, numbers, and symbols.",
+      "Min 8 characters consisting of uppercase, lowercase, numbers, symbols.",
     )
     .max(
       150,
-      "Password must be at least 8 characters consisting of uppercase letters, lowercase letters, numbers, and symbols.",
+      "Min 8 characters consisting of uppercase, lowercase, numbers, symbols.",
     )
     .matches(
       /[a-z]/,
-      "Password must be at least 8 characters consisting of uppercase letters, lowercase letters, numbers, and symbols.",
+      "Min 8 characters consisting of uppercase, lowercase, numbers, symbols.",
     )
     .matches(
       /[A-Z]/,
-      "Password must be at least 8 characters consisting of uppercase letters, lowercase letters, numbers, and symbols.",
+      "Min 8 characters consisting of uppercase, lowercase, numbers, symbols.",
     )
     .matches(
       /[0-9]/,
-      "Password must be at least 8 characters consisting of uppercase letters, lowercase letters, numbers, and symbols.",
+      "Min 8 characters consisting of uppercase, lowercase, numbers, symbols.",
     )
     .matches(
       /[!@#$%^&*(),.?":{}|<>]/,
-      "Password must be at least 8 characters consisting of uppercase letters, lowercase letters, numbers, and symbols.",
+      "Password must be at least 8 characters consisting of uppercase, lowercase, numbers, symbols.",
     )
     .required("Password is required"),
 });

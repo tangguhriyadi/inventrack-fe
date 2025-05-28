@@ -20,13 +20,19 @@ const UserFormModal = () => {
     handleSubmit,
     isSubmitting,
     setFieldValue,
+    resetForm,
   } = useUserForm();
+
+  const handleClose = () => {
+    resetForm();
+    close();
+  };
 
   return (
     <Modal
       open={!!mode}
       title={TypographyUtils.capitalize(mode ?? "") + " Role"}
-      onCancel={close}
+      onCancel={handleClose}
       footer={null}
     >
       <form className="flex flex-col gap-y-8 pt-2" onSubmit={handleSubmit}>

@@ -18,7 +18,7 @@ export default function useUserForm() {
   const { mode, value, close } = useUserStore();
 
   const initialValues: CreateUserSchema | UpdateUserSchema = {
-    id: value?.email ?? undefined,
+    id: value?.id ?? undefined,
     email: value?.email ?? "",
     gender: value?.gender ?? GenderEnum.Male,
     role: value?.role ?? RoleEnum.STAFF,
@@ -33,7 +33,7 @@ export default function useUserForm() {
   const createHook = useCreateUser(handleSuccessMutation);
   const updateHook = useUpdateUser(handleSuccessMutation);
 
-  return useFormik({
+  const formik = useFormik({
     initialValues: initialValues,
     validationSchema:
       mode === FormMode.Create ? createUserSchema : updateUserSchema,
@@ -47,4 +47,9 @@ export default function useUserForm() {
     },
     enableReinitialize: true,
   });
+
+  return {
+    ...formik,
+    isMutatiing: createHook.isPending || updateHook.isPending,
+  };
 }

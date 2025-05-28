@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import useUserList from "../hooks/use-list-user";
-import useDeleteUser from "../hooks/use-delete-user";
 import { useModalDialog } from "../../../providers/modal-dialog.provider";
 import { Card, SelectProps, TableProps } from "antd";
 import { OrderBy, QueryParams } from "../../../types/query-params";
@@ -10,16 +8,17 @@ import { useDebounce } from "../../../hooks/use-debounce";
 import SearchBox from "../../../components/form/input/search-box";
 import CoreSelect from "../../../components/form/select/select";
 import CoreTable from "../../../components/table/table";
-import { UserSchema } from "../schema/user.schema";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import CoreTableAction from "../../../components/table/table-action";
 import { FormMode } from "../../../enums/form.enum";
-import { useUserStore } from "../store/user.store";
+import { useCategoryStore } from "../store/category.store";
+import useCategoryList from "../hooks/use-list-category";
+import useDeleteCategory from "../hooks/use-delete-category";
+import { CategorySchema } from "../schema/category.schema";
 import dayjs from "dayjs";
-import RoleEnum from "../../../enums/role.enum";
 
-const UserTable = () => {
-  const { open } = useUserStore();
+const CategoryTable = () => {
+  const { open } = useCategoryStore();
   const [search, setSearch] = useState<string>("");
   const searchDebounceValue = useDebounce({ value: search });
 
@@ -29,16 +28,15 @@ const UserTable = () => {
     order_by: OrderBy.DESC,
     keyword: "",
     sort_by: "created_at",
-    role: undefined,
   });
-  const listHook = useUserList(queryParams);
-  const deleteHook = useDeleteUser();
+  const listHook = useCategoryList(queryParams);
+  const deleteHook = useDeleteCategory();
 
   const { openModalDialogBar } = useModalDialog();
 
   const handleClickDelete = async (id: string) => {
     openModalDialogBar({
-      title: "Are you sure want to delete this user ?",
+      title: "Are you sure want to delete this category ?",
       message: "Data would not be restored once you delete it",
       type: "warning",
       okText: "Submit",
@@ -48,7 +46,7 @@ const UserTable = () => {
     });
   };
 
-  const columns: TableProps<UserSchema>["columns"] = [
+  const columns: TableProps<CategorySchema>["columns"] = [
     {
       title: "Name",
       dataIndex: "name",
@@ -56,20 +54,10 @@ const UserTable = () => {
       sorter: (a, b) => b.name.localeCompare(a.name),
     },
     {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
-      sorter: (a, b) => b.email.localeCompare(a.email),
-    },
-    {
-      title: "Role",
-      dataIndex: "role",
-      key: "role",
-    },
-    {
-      title: "Gender",
-      dataIndex: "gender",
-      key: "gender",
+      title: "Created By",
+      dataIndex: "createdBy",
+      key: "createdBy",
+      render: (value) => <>{value?.name}</>,
     },
     {
       title: "Created Date",
@@ -119,12 +107,6 @@ const UserTable = () => {
       value: order,
     }),
   );
-  const roleOptions: SelectProps["options"] = Object.values(RoleEnum).map(
-    (order) => ({
-      label: order,
-      value: order,
-    }),
-  );
 
   useEffect(() => {
     setQueryParams((prev) => ({ ...prev, keyword: searchDebounceValue }));
@@ -148,22 +130,11 @@ const UserTable = () => {
             value={queryParams.order_by}
             options={orderByOptions}
           />
-          <CoreSelect
-            label="Role"
-            onChange={(val) => {
-              if (val !== "all") {
-                setQueryParams((prev) => ({ ...prev, role: val }));
-              } else {
-                setQueryParams((prev) => ({ ...prev, role: undefined }));
-              }
-            }}
-            value={queryParams.role ?? "all"}
-            options={[{ label: "All Role", value: "all" }, ...roleOptions]}
-          />
+          <div className="w-full" />
           <div className="w-full" />
         </div>
       </div>
-      <CoreTable<UserSchema>
+      <CoreTable<CategorySchema>
         dataSource={listHook.data?.data.results || []}
         loading={listHook.isLoading}
         columns={columns}
@@ -179,4 +150,4 @@ const UserTable = () => {
   );
 };
 
-export default UserTable;
+export default CategoryTable;

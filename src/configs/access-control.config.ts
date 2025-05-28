@@ -1,6 +1,8 @@
 export enum ModuleNameEnum {
   Dasboard = "dashboard",
   User = "user",
+  Inventory = "Inventory",
+  Category = "Category",
 }
 
 export enum AccessControllActionEnum {
