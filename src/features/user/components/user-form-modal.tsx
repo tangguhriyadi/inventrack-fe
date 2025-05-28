@@ -31,7 +31,7 @@ const UserFormModal = () => {
   return (
     <Modal
       open={!!mode}
-      title={TypographyUtils.capitalize(mode ?? "") + " Role"}
+      title={TypographyUtils.capitalize(mode ?? "") + " User"}
       onCancel={handleClose}
       footer={null}
     >

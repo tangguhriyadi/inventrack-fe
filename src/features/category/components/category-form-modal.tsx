@@ -28,7 +28,7 @@ const CategoryFormModal = () => {
   return (
     <Modal
       open={!!mode}
-      title={TypographyUtils.capitalize(mode ?? "") + " Role"}
+      title={TypographyUtils.capitalize(mode ?? "") + " Category"}
       onCancel={handleClose}
       footer={null}
     >
