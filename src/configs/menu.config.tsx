@@ -4,7 +4,8 @@ import React from "react";
 import { ModuleNameEnum } from "./access-control.config";
 import {
   DashboardOutlined,
-  SettingOutlined,
+  DatabaseOutlined,
+  ProductOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 
@@ -24,15 +25,28 @@ export const MENU_CONFIG: IMenuConfig[] = [
     module: ModuleNameEnum.Dasboard,
   },
   {
+    key: ROUTES.INVENTORY.LIST,
+    label: "Inventory",
+    module: ModuleNameEnum.Inventory,
+    icon: <ProductOutlined />,
+  },
+  {
     key: ROUTES.USER.LIST,
     label: "User",
     module: ModuleNameEnum.User,
     icon: <UserOutlined />,
   },
   {
-    key: ROUTES.CATEGORY.LIST,
-    label: "Category",
-    module: ModuleNameEnum.Category,
-    icon: <SettingOutlined />,
+    key: "Data Master",
+    label: "Data Master",
+    // module: ModuleNameEnum.Category,
+    icon: <DatabaseOutlined />,
+    subMenu: [
+      {
+        key: ROUTES.CATEGORY.LIST,
+        label: "Category",
+        module: ModuleNameEnum.Category,
+      },
+    ],
   },
 ];

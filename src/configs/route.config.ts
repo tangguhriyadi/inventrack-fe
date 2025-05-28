@@ -12,4 +12,7 @@ export const ROUTES = {
   CATEGORY: {
     LIST: "/dashboard/category",
   },
+  INVENTORY: {
+    LIST: "/dashboard/inventory",
+  },
 } as const;
