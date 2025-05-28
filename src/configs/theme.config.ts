@@ -93,9 +93,9 @@ export const theme: ThemeConfig = {
       activeBorderColor: COLORS.primary.DEFAULT,
       colorErrorBorder: COLORS.error.DEFAULT,
       colorWarningBorder: COLORS.warning.DEFAULT,
-      borderRadiusLG: 4,
-      borderRadius: 4,
-      borderRadiusSM: 4,
+      borderRadiusLG: 12,
+      borderRadius: 12,
+      borderRadiusSM: 12,
       fontSizeLG: 16,
       fontSize: 14,
       fontSizeSM: 14,
@@ -147,6 +147,5 @@ export const theme: ThemeConfig = {
       paddingSM: 16,
       borderRadius: 20,
     },
-
   },
 };

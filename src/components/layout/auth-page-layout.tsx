@@ -24,7 +24,7 @@ const AuthPageLayout: React.FC<AuthPageLayoutProps> = ({ children }) => {
             sizes="100vw"
           />
           <p className="text-center text-2xl leading-8 w-[480px]">
-            Manage all your bookings and inventories in one platform{" "}
+            Manage all your bookings and inventories in{" "}
             <strong>one platform</strong>.
           </p>
         </div>

@@ -3,7 +3,8 @@ export enum ModuleNameEnum {
   User = "user",
   Inventory = "Inventory",
   Category = "Category",
-  Booking = "Booking"
+  Booking = "Booking",
+  Approval = "Approval"
 }
 
 export enum AccessControllActionEnum {

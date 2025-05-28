@@ -16,6 +16,9 @@ export const ROUTES = {
     LIST: "/dashboard/inventory",
   },
   BOOKING: {
-    LIST: "/dashboard/booking"
-  }
+    LIST: "/dashboard/booking",
+  },
+  APPROVAL: {
+    LIST: "/dashboard/approval",
+  },
 } as const;

@@ -3,6 +3,7 @@ import { ROUTES } from "./route.config";
 import React from "react";
 import { ModuleNameEnum } from "./access-control.config";
 import {
+  AuditOutlined,
   DashboardOutlined,
   DatabaseOutlined,
   ProductOutlined,
@@ -30,6 +31,12 @@ export const MENU_CONFIG: IMenuConfig[] = [
     label: "Inventory",
     module: ModuleNameEnum.Inventory,
     icon: <ProductOutlined />,
+  },
+  {
+    key: ROUTES.APPROVAL.LIST,
+    label: "Booking",
+    module: ModuleNameEnum.Approval,
+    icon: <AuditOutlined />,
   },
   {
     key: ROUTES.BOOKING.LIST,

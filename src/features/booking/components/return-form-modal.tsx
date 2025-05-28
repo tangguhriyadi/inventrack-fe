@@ -40,7 +40,7 @@ const ReturnFormModal = () => {
   return (
     <Modal
       open={isOpenReturn}
-      title={"Booking Item"}
+      title={"Return Item"}
       onCancel={handleClose}
       footer={null}
     >
@@ -64,7 +64,7 @@ const ReturnFormModal = () => {
         />
 
         <div className="flex justify-end gap-x-2">
-          <Button onClick={close}>Cancel</Button>
+          <Button onClick={handleClose}>Cancel</Button>
           <Button
             type="primary"
             htmlType="submit"

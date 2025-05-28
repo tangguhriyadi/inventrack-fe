@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import {  Card, SelectProps, TableProps, Tag } from "antd";
+import { Card, SelectProps, TableProps, Tag } from "antd";
 import { OrderBy, QueryParams } from "../../../types/query-params";
 import { useDebounce } from "../../../hooks/use-debounce";
 import SearchBox from "../../../components/form/input/search-box";
@@ -9,16 +9,18 @@ import CoreSelect from "../../../components/form/select/select";
 import CoreTable from "../../../components/table/table";
 import dayjs from "dayjs";
 import useCategoryDropdown from "../../category/hooks/use-category-dropdown";
-import { BookingSchema } from "../schema/booking.schema";
-import useBookingList from "../hooks/use-list-booking";
 import BookingStatus from "../../../enums/booking-status.enum";
 import { COLORS } from "../../../../tailwind.config";
-import useReturnBooking from "../hooks/use-return";
+import useBookingList from "../../booking/hooks/use-list-booking";
+import { BookingSchema } from "../../booking/schema/booking.schema";
+import CoreTableAction from "../../../components/table/table-action";
+import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
+import { useApprovalStore } from "../store/approval-store";
 import { useModalDialog } from "../../../providers/modal-dialog.provider";
-import { UndoOutlined } from "@ant-design/icons";
+import useApproveBooking from "../hooks/use-approve";
 
-const BookingTable = () => {
-  //   const { open } = useInventoryStore();
+const ApprovalTable = () => {
+  const { open } = useApprovalStore();
   const [search, setSearch] = useState<string>("");
   const searchDebounceValue = useDebounce({ value: search });
   const { openModalDialogBar } = useModalDialog();
@@ -41,17 +43,17 @@ const BookingTable = () => {
     [BookingStatus.Returned]: COLORS.info.DEFAULT,
   };
 
-  const returnHook = useReturnBooking();
+  const approveHook = useApproveBooking();
 
-  const handleReturn = (id: string) => {
+  const handleApprove = (id: string) => {
     openModalDialogBar({
-      title: "Return Confirmation",
-      message: "Are you sure want to return this item ?",
+      title: "Booking Approval",
+      message: "Are you sure want to approve this booking ?",
       type: "warning",
       okText: "Submit",
-      onOk: async () => await returnHook.mutateAsync(id),
+      onOk: async () => await approveHook.mutateAsync(id),
       cancelText: "Cancel",
-      isLoading: returnHook.isPending,
+      isLoading: approveHook.isPending,
     });
   };
 
@@ -122,18 +124,35 @@ const BookingTable = () => {
             dayjs(row.plan_return_at).valueOf() < dayjs().valueOf() ? (
               <Tag color={COLORS.error.DEFAULT}>OVERDUE</Tag>
             ) : null}
-            {row.status === BookingStatus.Approved && (
-              <div
-                className="px-1 flex gap-x-2 rounded-md border border-primary-90 hover:border-primary text-primary cursor-pointer duration-300 transition-all"
-                role="navigation"
-                onClick={() => handleReturn(row.id)}
-              >
-                <UndoOutlined /> Return
-              </div>
-            )}
           </div>
         );
       },
+    },
+    {
+      title: "Action",
+      dataIndex: "action",
+      key: "action",
+      width: 80,
+      render: (_, records) => (
+        <CoreTableAction
+          items={[
+            {
+              label: "Approve",
+              key: "1",
+              onClick: () => handleApprove(records.id),
+              icon: <CheckOutlined />,
+              disabled: records.status !== BookingStatus.Pending,
+            },
+            {
+              label: <p className="text-error">Reject</p>,
+              key: "2",
+              onClick: () => open(records.id),
+              icon: <CloseOutlined className="!text-error" />,
+              disabled: records.status !== BookingStatus.Pending,
+            },
+          ]}
+        />
+      ),
     },
   ];
 
@@ -221,4 +240,4 @@ const BookingTable = () => {
   );
 };
 
-export default BookingTable;
+export default ApprovalTable;
