@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useCallback, useContext, useMemo } from "react";
-import { Modal } from "antd";
+import { Modal, App as AntApp } from "antd";
 
 interface OpenModalDialogProps {
   message: string;
@@ -26,79 +26,43 @@ const ModalDialogProvider: React.FC<React.PropsWithChildren> = ({
 }) => {
   const [api, contextHolder] = Modal.useModal();
 
-  const openModalDialogBar = useCallback(
-    (config: OpenModalDialogProps) => {
-      switch (config.type) {
-        case "info":
-          api.info({
-            title: config.title,
-            content: config.message,
-            onOk: config.onOk,
-            cancelText: config.cancelText,
-            okCancel:
-              config.cancelText && config.cancelText.length > 0 ? true : false,
-            okText: config.okText ?? "OK",
-            okButtonProps: {
-              loading: config.isLoading,
-            },
-          });
-          break;
-        case "success":
-          api.success({
-            title: config.title,
-            content: config.message,
-            onOk: config.onOk,
-            cancelText: config.cancelText,
-            okCancel:
-              config.cancelText && config.cancelText.length > 0 ? true : false,
-            okText: config.okText ?? "OK",
-            okButtonProps: {
-              loading: config.isLoading,
-            },
-          });
-          break;
-        case "warning":
-          api.warning({
-            title: config.title,
-            content: config.message,
-            onOk: config.onOk,
-            cancelText: config.cancelText,
-            okCancel:
-              config.cancelText && config.cancelText.length > 0 ? true : false,
-            okText: config.okText ?? "OK",
-            okButtonProps: {
-              loading: config.isLoading,
-            },
-          });
-          break;
-        case "error":
-          api.error({
-            title: config.title,
-            content: config.message,
-            onOk: config.onOk,
-            cancelText: config.cancelText,
-            okCancel:
-              config.cancelText && config.cancelText.length > 0 ? true : false,
-            okText: config.okText ?? "OK",
-            okButtonProps: {
-              loading: config.isLoading,
-            },
-          });
-          break;
-        default:
-          break;
-      }
-    },
-    [api],
-  );
+  const openModalDialogBar = useCallback((config: OpenModalDialogProps) => {
+    let loading = false;
 
+    const modal = Modal.confirm({
+      title: config.title,
+      content: config.message,
+      type: config.type,
+      okText: config.okText ?? "OK",
+      cancelText: config.cancelText ?? "Cancel",
+      okButtonProps: { loading: false },
+      onOk: async () => {
+        if (loading) return;
+        try {
+          loading = true;
+          modal.update({ okButtonProps: { loading: true } });
+          if (config.onOk) await config.onOk();
+          modal.destroy(); // Close modal after success
+        } catch {
+          // Optionally handle error
+          modal.update({ okButtonProps: { loading: false } });
+          loading = false;
+          console.error(api.error);
+          return Promise.reject(); // Prevent modal from closing
+        }
+      },
+    });
+    //eslint-disable-next-line
+  }, []);
   const value = useMemo(() => ({ openModalDialogBar }), [openModalDialogBar]);
 
   return (
-    <ModalDialogContext.Provider value={value}>
-      {contextHolder}
-      {children}
-    </ModalDialogContext.Provider>
+    <AntApp>
+      <ModalDialogContext.Provider value={value}>
+        {contextHolder}
+        {children}
+      </ModalDialogContext.Provider>
+    </AntApp>
   );
 };
 
