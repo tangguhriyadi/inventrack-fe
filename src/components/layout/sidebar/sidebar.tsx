@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useMemo } from "react";
-import { Menu } from "antd";
+import { Menu, Skeleton } from "antd";
 import { usePathname, useRouter } from "next/navigation";
 import { MENU_CONFIG } from "@/configs/menu.config";
 import Sider from "antd/es/layout/Sider";
@@ -9,15 +9,17 @@ import { cn } from "@/utils/cn";
 import { ROUTES } from "@/configs/route.config";
 import useAppLayoutStore from "@/store/app-layout";
 import SidebarMenuIcon from "../../icon/sidebar-menu";
+import { useSession } from "next-auth/react";
+import RoleEnum from "../../../enums/role.enum";
 
 const Sidebar: React.FC = () => {
   const { isCollapsed, isHideSidebar, toggleIsCollapsed } = useAppLayoutStore();
   const router = useRouter();
   const pathname = usePathname();
 
-  // const { data, status } = useSession();
+  const { data: session, status } = useSession();
 
-  // const isLoading = status === "loading";
+  const isLoading = status === "loading";
 
   const selectedKey = useMemo(() => {
     if (pathname === "/") return "/";
@@ -29,6 +31,19 @@ const Sidebar: React.FC = () => {
       paths.slice(1, paths.length)[1]
     }`;
   }, [pathname]);
+
+  const sideBars = MENU_CONFIG.filter((data) =>
+    data.roles.includes(session?.user?.role as RoleEnum),
+  ).map((menu) => ({
+    key: menu.key,
+    icon: menu.icon,
+    label: menu.label,
+    className: "step-" + menu.module,
+    children: menu.subMenu?.map((sub) => ({
+      key: sub.key,
+      label: sub.label,
+    })),
+  }));
 
   if (isHideSidebar) return null;
 
@@ -56,25 +71,24 @@ const Sidebar: React.FC = () => {
             <SidebarMenuIcon />
           </div>
 
-          <Menu
-            className="p-0"
-            mode="inline"
-            defaultSelectedKeys={[selectedKey]}
-            items={MENU_CONFIG.map((menu) => ({
-              key: menu.key,
-              icon: menu.icon,
-              label: menu.label,
-              className: "step-" + menu.module,
-              children: menu.subMenu?.map((sub) => ({
-                key: sub.key,
-                label: sub.label,
-              })),
-            }))}
-            onClick={({ key }) => {
-              router.push(key.toString());
-            }}
-            selectedKeys={[selectedKey]}
-          />
+          {isLoading ? (
+            <div className="flex flex-col gap-y-4">
+              <Skeleton.Input className="!w-full"/>
+              <Skeleton.Input className="!w-full"/>
+              <Skeleton.Input className="!w-full"/>
+            </div>
+          ) : (
+            <Menu
+              className="p-0"
+              mode="inline"
+              defaultSelectedKeys={[selectedKey]}
+              items={sideBars}
+              onClick={({ key }) => {
+                router.push(key.toString());
+              }}
+              selectedKeys={[selectedKey]}
+            />
+          )}
         </div>
       </div>
     </Sider>

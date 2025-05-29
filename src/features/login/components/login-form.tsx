@@ -26,7 +26,9 @@ const LoginForm = () => {
           >
             Log In Inven<span className="text-accent">Track</span>
           </Typography.Title>
-          <Typography.Text>Your inventory management solution.</Typography.Text>
+          <Typography.Text>
+            Smart Inventory & Booking Management System.
+          </Typography.Text>
         </div>
 
         {/* <div>
