@@ -5,7 +5,10 @@ export const createInventorySchema = yup.object({
   quantity: yup.number().required().min(1),
   category_id: yup.string().required("Category is required"),
   is_available: yup.boolean().required().default(true),
-  image_url: yup.string().required("Image is required"),
+  image_url: yup
+    .string()
+    .required("Image is required")
+    .url("Image URL must be a valid URL"),
 });
 
 export type CreateInventorySchema = yup.InferType<typeof createInventorySchema>;

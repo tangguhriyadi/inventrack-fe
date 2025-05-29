@@ -11,4 +11,8 @@ export const DASHBOARD_ADMIN_API_ROUTE = {
     ENDPOINT: "/api/dashboard/booked/overdue",
     KEY: ["booking-overdue"],
   },
+  STATUS: {
+    ENDPOINT: "/api/dashboard/booked/byStatus",
+    KEY: ["booking-byStatus"],
+  },
 } as const;

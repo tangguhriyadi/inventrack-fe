@@ -9,6 +9,6 @@ export interface QueryParams {
 }
 
 export enum OrderBy {
-  ASC = "asc",
-  DESC = "desc",
+  ASC = "oldest",
+  DESC = "newest",
 }

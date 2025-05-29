@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useModalDialog } from "../../../providers/modal-dialog.provider";
-import { Card, SelectProps, TableProps } from "antd";
+import { Card, Image, SelectProps, TableProps, Tag } from "antd";
 import { OrderBy, QueryParams } from "../../../types/query-params";
 import { useDebounce } from "../../../hooks/use-debounce";
 import SearchBox from "../../../components/form/input/search-box";
@@ -17,6 +17,8 @@ import useDeleteInventory from "../hooks/use-delete-inventory";
 import { InventorySchema } from "../schema/inventory.schema";
 import useInventoryList from "../hooks/use-list-inventory";
 import useCategoryDropdown from "../../category/hooks/use-category-dropdown";
+import { COLORS } from "../../../../tailwind.config";
+import ConditionEnum from "../../../enums/condition.enum";
 
 const InventoryTable = () => {
   const { open } = useInventoryStore();
@@ -30,6 +32,7 @@ const InventoryTable = () => {
     keyword: "",
     sort_by: "created_at",
     category_id: undefined,
+    condition: undefined,
   });
   const listHook = useInventoryList(queryParams);
   const deleteHook = useDeleteInventory();
@@ -49,7 +52,28 @@ const InventoryTable = () => {
     });
   };
 
+  const colorMapping: Record<string, string> = {
+    GOOD: COLORS.success.DEFAULT,
+    NEW: COLORS.info.DEFAULT,
+    WORN: COLORS.warning.DEFAULT,
+  };
+
   const columns: TableProps<InventorySchema>["columns"] = [
+    {
+      title: "Image",
+      dataIndex: "image_url",
+      key: "image_url",
+      render: (val) => (
+        <Image
+          src={val}
+          fallback="/default-product-image.png"
+          width={32}
+          height={32}
+          alt="inv"
+          preview
+        />
+      ),
+    },
     {
       title: "Name",
       dataIndex: "name",
@@ -72,12 +96,15 @@ const InventoryTable = () => {
       title: "Availability",
       dataIndex: "is_available",
       key: "is_available",
+      render: (val) => <>{val ? "YES" : "NO"}</>,
     },
     {
-      title: "Created By",
-      dataIndex: "createdBy",
-      key: "createdBy",
-      render: (value) => <>{value?.name}</>,
+      title: "Condition",
+      dataIndex: "condition",
+      key: "condition",
+      render: (value) => (
+        <Tag color={colorMapping[value as string]}>{value}</Tag>
+      ),
     },
     {
       title: "Created Date",
@@ -114,6 +141,7 @@ const InventoryTable = () => {
               key: "2",
               onClick: () => handleClickDelete(records.id),
               icon: <DeleteOutlined className="!text-error" />,
+              disabled: records.condition === ConditionEnum.Worn,
             },
           ]}
         />
@@ -127,6 +155,12 @@ const InventoryTable = () => {
       value: order,
     }),
   );
+  const conditionOptions: SelectProps["options"] = Object.values(
+    ConditionEnum,
+  ).map((order) => ({
+    label: order,
+    value: order,
+  }));
 
   const categoryOptions: SelectProps["options"] = [
     { label: "All Category", value: "all" },
@@ -166,9 +200,24 @@ const InventoryTable = () => {
             }}
             value={queryParams.category_id ?? "all"}
             options={categoryOptions}
+            loading={categoryDropdownHook.isLoading}
           />
 
-          <div className="w-full" />
+          <CoreSelect
+            label="Condition"
+            onChange={(val) => {
+              if (val !== "all") {
+                setQueryParams((prev) => ({ ...prev, condition: val }));
+              } else {
+                setQueryParams((prev) => ({ ...prev, condition: undefined }));
+              }
+            }}
+            value={queryParams.condition ?? "all"}
+            options={[
+              { value: "all", label: "All Condition" },
+              ...(conditionOptions || []),
+            ]}
+          />
         </div>
       </div>
       <CoreTable<InventorySchema>

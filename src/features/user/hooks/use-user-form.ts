@@ -37,13 +37,18 @@ export default function useUserForm() {
     initialValues: initialValues,
     validationSchema:
       mode === FormMode.Create ? createUserSchema : updateUserSchema,
-    onSubmit: (values, helper) => {
+    onSubmit: async (values, helper) => {
       if (mode === FormMode.Create) {
-        createHook.mutate(values as CreateUserSchema);
+        await createHook.mutateAsync(values as CreateUserSchema).then(() => {
+          helper.resetForm();
+        });
       } else {
-        updateHook.mutate({ ...values, id: value?.id ?? "" });
+        await updateHook
+          .mutateAsync({ ...values, id: value?.id ?? "" })
+          .then(() => {
+            helper.resetForm();
+          });
       }
-      helper.resetForm();
     },
     enableReinitialize: true,
   });

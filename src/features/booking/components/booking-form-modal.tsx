@@ -47,6 +47,7 @@ const BookingFormModal = () => {
           error={errors.inventory_id}
           placeholder="Select Item"
           showSearch
+          loading={inventoryDropdownHook.isLoading}
           filterOption={(input, option) =>
             String(option?.label ?? "")
               .toLowerCase()

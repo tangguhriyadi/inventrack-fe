@@ -35,13 +35,20 @@ export default function useInventoryForm() {
     initialValues: initialValues,
     validationSchema:
       mode === FormMode.Create ? createInventorySchema : updateInventorySchema,
-    onSubmit: (values, helper) => {
+    onSubmit: async (values, helper) => {
       if (mode === FormMode.Create) {
-        createHook.mutate(values as CreateInventorySchema);
+        await createHook
+          .mutateAsync(values as CreateInventorySchema)
+          .then(() => {
+            helper.resetForm();
+          });
       } else {
-        updateHook.mutate({ ...values, id: value?.id ?? "" });
+        await updateHook
+          .mutateAsync({ ...values, id: value?.id ?? "" })
+          .then(() => {
+            helper.resetForm();
+          });
       }
-      helper.resetForm();
     },
     enableReinitialize: true,
   });

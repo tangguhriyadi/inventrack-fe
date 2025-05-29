@@ -27,7 +27,7 @@ export const MENU_CONFIG: IMenuConfig[] = [
     icon: <DashboardOutlined />,
     label: "Dashboard",
     module: ModuleNameEnum.Dasboard,
-    roles: [RoleEnum.ADMIN],
+    roles: [RoleEnum.ADMIN, RoleEnum.STAFF],
   },
   {
     key: ROUTES.INVENTORY.LIST,

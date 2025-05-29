@@ -16,7 +16,6 @@ const CategoryFormModal = () => {
     handleChange,
     handleSubmit,
     isSubmitting,
-    isMutating,
     resetForm,
   } = useCategoryForm();
 
@@ -46,7 +45,7 @@ const CategoryFormModal = () => {
           <Button
             type="primary"
             htmlType="submit"
-            loading={isSubmitting || isMutating}
+            loading={isSubmitting}
           >
             Submit
           </Button>

@@ -56,11 +56,11 @@ const UserFormModal = () => {
           />
         )}
         <CoreInput
-          label="User Name"
+          label="Full Name"
           value={values.name}
           name="name"
           error={errors.name}
-          placeholder="User Name"
+          placeholder="Full Name"
           onChange={handleChange}
         />
         <CoreSelect

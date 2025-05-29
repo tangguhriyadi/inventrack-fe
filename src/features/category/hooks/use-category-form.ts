@@ -31,16 +31,26 @@ export default function useCategoryForm() {
     initialValues: initialValues,
     validationSchema:
       mode === FormMode.Create ? createCategorySchema : updateCategorySchema,
-    onSubmit: (values, helper) => {
+    onSubmit: async (values, helper) => {
       if (mode === FormMode.Create) {
-        createHook.mutate(values as CreateCategorySchema);
+        await createHook
+          .mutateAsync(values as CreateCategorySchema)
+          .then(() => {
+            helper.resetForm();
+          });
       } else {
-        updateHook.mutate({ ...values, id: value?.id ?? "" });
+        await updateHook
+          .mutateAsync({ ...values, id: value?.id ?? "" })
+          .then(() => {
+            helper.resetForm();
+          });
       }
-      helper.resetForm();
     },
     enableReinitialize: true,
   });
 
-  return { ...formik, isMutating: createHook.isPending || updateHook.isPending };
+  return {
+    ...formik,
+    isMutating: createHook.isPending || updateHook.isPending,
+  };
 }

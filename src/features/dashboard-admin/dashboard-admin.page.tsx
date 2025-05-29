@@ -13,7 +13,7 @@ const BookingBarChartByCategory = dynamic(
 
 const DashboardAdminPage = () => {
   return (
-    <div className="p-6">
+    <div className="">
       <h1 className="text-xl font-bold mb-4">Dashboard</h1>
       <div className="flex flex-col gap-y-4">
         <BookingBarChart />

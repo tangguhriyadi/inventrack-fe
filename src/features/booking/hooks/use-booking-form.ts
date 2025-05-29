@@ -23,8 +23,9 @@ export default function useBokingForm() {
     initialValues,
     validationSchema: createBookingSchema,
     onSubmit: async (values, helper) => {
-      await createHook.mutateAsync(values);
-      helper.resetForm()
+      await createHook.mutateAsync(values).then(() => {
+        helper.resetForm();
+      });
     },
     enableReinitialize: true,
   });

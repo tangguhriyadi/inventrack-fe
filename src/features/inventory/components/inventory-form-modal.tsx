@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Modal, SelectProps } from "antd";
+import { Button, Modal, SelectProps, Switch } from "antd";
 import React from "react";
 import TypographyUtils from "../../../utils/typography";
 import CoreInput from "../../../components/form/input/input";
@@ -52,7 +52,7 @@ const InventoryFormModal = () => {
 
         <CoreSelect
           label="Category"
-          onChange={(val) => setFieldValue("category_id", val, false)}
+          onChange={(val) => setFieldValue("category_id", val, true)}
           value={values.category_id}
           options={categoryOptions}
           error={errors.category_id}
@@ -70,7 +70,7 @@ const InventoryFormModal = () => {
           name="quantity"
           value={values.quantity}
           onChange={(e) => {
-            setFieldValue("quantity", Number(e.target.value), false);
+            setFieldValue("quantity", Number(e.target.value), true);
           }}
           suffix="pcs"
           error={errors.quantity}
@@ -83,6 +83,15 @@ const InventoryFormModal = () => {
           placeholder="Image"
           onChange={handleChange}
         />
+        <div className="flex gap-x-4 mt-2">
+          <div>Availability</div>
+          <Switch
+            checked={values.is_available}
+            onChange={(val) => setFieldValue("is_available", val)}
+            value={values.is_available}
+          />
+          <div>{values.is_available ? "YES" : "NO"}</div>
+        </div>
         <div className="flex justify-end gap-x-2">
           <Button onClick={close}>Cancel</Button>
           <Button type="primary" htmlType="submit" loading={isSubmitting}>
