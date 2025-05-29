@@ -2,7 +2,7 @@
 
 import { Badge, Popover, Typography } from "antd";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import BellIcon from "@/components/icon/bell";
 import NotificationItem, {
   NotificationItemProps,
@@ -13,6 +13,21 @@ import useNotificationList from "./hooks/use-notification-list";
 import { OrderBy } from "../../types/query-params";
 import dayjs from "dayjs";
 import useReadNotification from "./hooks/use-read-notification";
+import { io } from "socket.io-client";
+import ENV from "../../utils/env";
+import { useSession } from "next-auth/react";
+import { useNotificationBar } from "../../providers/notification.provider";
+import { useQueryClient } from "@tanstack/react-query";
+import { NOTIFICATION_API_ROUTE } from "./config/api-route";
+import { BOOKING_API_ROUTE } from "../booking/configs/api-route.config";
+import { INVENTORY_API_ROUTE } from "../inventory/configs/api-route";
+import { APPROVAL_API_ROUTE } from "../approval/config/api-route";
+
+interface NotificationSchema {
+  title: string;
+  message: string;
+  type: "info" | "success" | "error" | "warning";
+}
 
 export function formatTimeDiffFromNow(date: string | Date): string {
   const now = dayjs();
@@ -33,8 +48,11 @@ export function formatTimeDiffFromNow(date: string | Date): string {
 
 const Notification: React.FC = () => {
   const { isHideSidebar } = useAppLayoutStore();
+  const { data: session } = useSession();
+  const queryClient = useQueryClient();
 
   const readNotif = useReadNotification();
+  const { openNotificationBar } = useNotificationBar();
 
   const { data } = useNotificationList({
     page: 1,
@@ -54,6 +72,48 @@ const Notification: React.FC = () => {
   const countUnread = data
     ? data.data.results.filter((d) => !d.is_read).length
     : 0;
+
+  useEffect(() => {
+    const socketIO = io(ENV.BASE_API_URL, {
+      transports: ["polling", "websocket"],
+    });
+
+    socketIO.on("connect", () => {
+      // Join user-specific room if userId is provided
+      if (session?.user.user_id) {
+        socketIO.emit("join-user", session?.user.user_id);
+      }
+    });
+
+    // socketIO.on("disconnect", () => {
+    //   console.log("Disconnected from notification server");
+    // });
+
+    socketIO.on("notification", (notification: NotificationSchema) => {
+      openNotificationBar({
+        type: notification.type,
+        message: notification.message,
+        title: notification.title,
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: NOTIFICATION_API_ROUTE.LIST.KEY,
+      });
+      queryClient.invalidateQueries({
+        queryKey: BOOKING_API_ROUTE.LIST.KEY,
+      });
+      queryClient.invalidateQueries({
+        queryKey: INVENTORY_API_ROUTE.LIST.KEY,
+      });
+      queryClient.invalidateQueries({
+        queryKey: APPROVAL_API_ROUTE.LIST.KEY,
+      });
+    });
+
+    return () => {
+      socketIO.disconnect();
+    };
+  }, [session?.user.user_id, openNotificationBar]);
 
   const notificationContent = (
     <div className="w-[370px]">
