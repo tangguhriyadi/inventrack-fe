@@ -30,7 +30,7 @@ const Content: React.FC<ContentLayoutProps> = ({ children }) => {
       )}
       style={isHideSidebar ? sidebarHideStyle : sidebarNotHideStyle}
     >
-      <div className="pl-4 pr-2 pb-2 h-full overflow-y-auto overflow-x-hidden main-scroll">
+      <div className="pl-4 pr-2 pb-2 h-full overflow-y-auto overflow-x-auto main-scroll">
         {children}
       </div>
     </main>
