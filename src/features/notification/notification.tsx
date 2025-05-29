@@ -113,7 +113,7 @@ const Notification: React.FC = () => {
     return () => {
       socketIO.disconnect();
     };
-  }, [session?.user.user_id, openNotificationBar]);
+  }, [session?.user.user_id, openNotificationBar, queryClient]);
 
   const notificationContent = (
     <div className="w-[370px]">
