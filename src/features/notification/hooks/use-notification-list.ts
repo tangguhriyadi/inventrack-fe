@@ -33,5 +33,6 @@ export default function useNotificationList(params: QueryParams) {
   return useQuery({
     queryKey: [...NOTIFICATION_API_ROUTE.LIST.KEY, ...Object.values(params)],
     queryFn: () => api(params),
+    refetchOnWindowFocus: true,
   });
 }

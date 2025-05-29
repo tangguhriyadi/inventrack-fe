@@ -21,4 +21,7 @@ export const ROUTES = {
   APPROVAL: {
     LIST: "/dashboard/approval",
   },
+  AUDIT_TRAILS : {
+    LIST: "/dashboard/audit-trails"
+  }
 } as const;

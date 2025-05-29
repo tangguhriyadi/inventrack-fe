@@ -77,14 +77,19 @@ const ApprovalTable = () => {
       key: "category",
       render: (val, props) => <>{props.inventory.inventoryCategory.name}</>,
     },
-    // {
-    //   title: "Created Date",
-    //   dataIndex: "created_at",
-    //   key: "created_at",
-    //   sorter: (a, b) =>
-    //     dayjs(a.created_at).valueOf() - dayjs(b.created_at).valueOf(),
-    //   render: (value) => <>{dayjs(value).format("DD/MM/YYYY HH:mm")}</>,
-    // },
+    {
+      title: "Requested By",
+      dataIndex: "user",
+      key: "user",
+      sorter: (a, b) => {
+        if (a.user.name && b.user.name) {
+          return b.user.name.localeCompare(a.user.name);
+        } else {
+          return -1;
+        }
+      },
+      render: (val) => <>{val.name}</>,
+    },
     {
       title: "Booking Date",
       dataIndex: "booking_at",

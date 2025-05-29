@@ -8,6 +8,7 @@ import {
   DatabaseOutlined,
   ProductOutlined,
   ScheduleOutlined,
+  UnorderedListOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import RoleEnum from "../enums/role.enum";
@@ -55,6 +56,13 @@ export const MENU_CONFIG: IMenuConfig[] = [
     label: "User",
     module: ModuleNameEnum.User,
     icon: <UserOutlined />,
+    roles: [RoleEnum.ADMIN],
+  },
+  {
+    key: ROUTES.AUDIT_TRAILS.LIST,
+    label: "User Logs",
+    module: ModuleNameEnum.AuditTrails,
+    icon: <UnorderedListOutlined />,
     roles: [RoleEnum.ADMIN],
   },
   {

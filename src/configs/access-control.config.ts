@@ -4,7 +4,8 @@ export enum ModuleNameEnum {
   Inventory = "Inventory",
   Category = "Category",
   Booking = "Booking",
-  Approval = "Approval"
+  Approval = "Approval",
+  AuditTrails = "Autdit Trails"
 }
 
 export enum AccessControllActionEnum {

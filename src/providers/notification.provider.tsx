@@ -31,28 +31,28 @@ const NotificationProvider: React.FC<React.PropsWithChildren> = ({
           api.info({
             message: config.title,
             description: config.message,
-            placement: "top",
+            placement: "topRight",
           });
           break;
         case "success":
           api.success({
             message: config.title,
             description: config.message,
-            placement: "top",
+            placement: "topRight",
           });
           break;
         case "warning":
           api.warning({
             message: config.title,
             description: config.message,
-            placement: "top",
+            placement: "topRight",
           });
           break;
         case "error":
           api.error({
             message: config.title,
             description: config.message,
-            placement: "top",
+            placement: "topRight",
           });
           break;
         default:
