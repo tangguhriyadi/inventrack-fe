@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import {  Card, SelectProps, TableProps, Tag } from "antd";
+import { Card, SelectProps, TableProps, Tag } from "antd";
 import { OrderBy, QueryParams } from "../../../types/query-params";
 import { useDebounce } from "../../../hooks/use-debounce";
 import SearchBox from "../../../components/form/input/search-box";
@@ -108,6 +108,11 @@ const BookingTable = () => {
       render: (value) => (
         <>{value ? dayjs(value).format("DD/MM/YYYY HH:mm") : "-"}</>
       ),
+    },
+    {
+      title: "Reject Reason",
+      dataIndex: "reject_reason",
+      key: "reject_reason",
     },
     {
       title: "Status",
