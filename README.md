@@ -16,7 +16,11 @@ highly relevant to Elevate360’s future scalability, scheduling, and system eff
 - zustand
 - tanstack
 
---
+---
+
+# Admin Credential
+- Email : admin@admin.com
+- Password: Admin123!
 
 ## Prerequisites
 
