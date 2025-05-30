@@ -8,8 +8,7 @@ import { getGlobalOpenNotification } from "../providers/notification.provider";
 
 const HttpClient = () => {
   const defaultOptions = {
-    baseURL: ENV.BASE_API_URL,
-    withCredentials: true,
+    baseURL: ENV.BASE_API_URL
   };
 
   const instance = axios.create(defaultOptions);
