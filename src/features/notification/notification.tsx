@@ -2,7 +2,7 @@
 
 import { Badge, Popover, Typography } from "antd";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import BellIcon from "@/components/icon/bell";
 import NotificationItem, {
   NotificationItemProps,
@@ -50,6 +50,7 @@ const Notification: React.FC = () => {
   const { isHideSidebar } = useAppLayoutStore();
   const { data: session } = useSession();
   const queryClient = useQueryClient();
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   const readNotif = useReadNotification();
   const { openNotificationBar } = useNotificationBar();
@@ -108,6 +109,8 @@ const Notification: React.FC = () => {
       queryClient.invalidateQueries({
         queryKey: APPROVAL_API_ROUTE.LIST.KEY,
       });
+
+      audioRef.current?.play();
     });
 
     return () => {
@@ -156,39 +159,47 @@ const Notification: React.FC = () => {
   );
   if (isHideSidebar) return null;
   return (
-    <div className="flex items-center justify-center bg-surface-2 w-8 h-8 rounded-full">
-      <div>
-        <Popover
-          placement="bottomLeft"
-          content={notificationContent}
-          trigger={"click"}
-          onOpenChange={(visible) => {
-            if (!visible && countUnread > 0) {
-              readNotif.mutate();
-            }
-          }}
-        >
-          <Badge
-            // count={3}
-            dot
-            offset={[-10, 2]}
-            status="error"
-            style={{
-              width: 8,
-              height: 8,
-              opacity: countUnread > 0 ? undefined : 0,
+    <>
+      <div className="flex items-center justify-center bg-surface-2 w-8 h-8 rounded-full">
+        <div>
+          <Popover
+            placement="bottomLeft"
+            content={notificationContent}
+            trigger={"click"}
+            onOpenChange={(visible) => {
+              if (!visible && countUnread > 0) {
+                readNotif.mutate();
+              }
             }}
           >
-            <Link
-              href="#"
-              className="shadow-none text-black  hover:text-black px-2 !w-5 !h-5"
+            <Badge
+              // count={3}
+              dot
+              offset={[-10, 2]}
+              status="error"
+              style={{
+                width: 8,
+                height: 8,
+                opacity: countUnread > 0 ? undefined : 0,
+              }}
             >
-              <BellIcon className="!text-[20px] !w-5 !h-5" />
-            </Link>
-          </Badge>
-        </Popover>
+              <Link
+                href="#"
+                className="shadow-none text-black  hover:text-black px-2 !w-5 !h-5"
+              >
+                <BellIcon className="!text-[20px] !w-5 !h-5" />
+              </Link>
+            </Badge>
+          </Popover>
+        </div>
       </div>
-    </div>
+      <audio
+        className="hidden"
+        ref={audioRef}
+        src="/apple_pay.mp3"
+        preload="auto"
+      />
+    </>
   );
 };
 
