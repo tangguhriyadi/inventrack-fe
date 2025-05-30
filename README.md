@@ -6,6 +6,18 @@ highly relevant to Elevate360’s future scalability, scheduling, and system eff
 
 ---
 
+# Tech Stack & Libraries
+- Nextjs
+- Reactjs
+- Typescript
+- Tailwind
+- Ant Design
+- socket.io
+- zustand
+- tanstack
+
+--
+
 ## Prerequisites
 
 - Node.js (v20 or newer recommended)
